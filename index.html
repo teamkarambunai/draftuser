@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FIREBASE SDK (Modular - Updated to 11.6.1) -->
+    <!-- FIREBASE SDK (Modular - 11.6.1) — KEKAL untuk akaun RAKYAT (daftar/log masuk/profil).
+         Akses ADMIN tidak lagi bergantung pada Firebase (lihat nota di bahagian JS). -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -72,7 +73,6 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-
         .card-hover:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
@@ -93,7 +93,6 @@
             transition: all 0.2s ease;
             box-shadow: 0 2px 4px rgba(26, 74, 154, 0.2);
         }
-
         .btn-primary:hover {
             background-color: var(--hover-blue);
             box-shadow: 0 4px 6px rgba(26, 74, 154, 0.3);
@@ -117,14 +116,12 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         @media (min-width: 640px) { .slider-container { height: 400px; } }
-
         .slide {
             position: absolute; width: 100%; height: 100%;
             opacity: 0; transition: opacity 0.8s ease-in-out;
             background-size: cover; background-position: center;
         }
         .slide.active { opacity: 1; }
-
         .slider-overlay {
             position: absolute; inset: 0;
             background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 60%);
@@ -158,12 +155,10 @@
         }
         .ticker-move:hover { animation-play-state: paused; }
         .ticker-item { display: inline-block; padding: 0 2rem; font-size: 0.9rem; font-weight: 500; }
-
         @keyframes ticker-anim {
             0% { transform: translate3d(0, 0, 0); }
             100% { transform: translate3d(-100%, 0, 0); }
         }
-
         input, select, textarea {
             background-color: #ffffff !important;
             border: 1px solid #d1d5db !important;
@@ -177,7 +172,7 @@
             outline: 2px solid rgba(26, 74, 154, 0.2);
             box-shadow: none !important;
         }
-        /* BAHARU: reset style checkbox supaya tak terikut rule input di atas */
+        /* reset style checkbox supaya tak terikut rule input di atas */
         input[type="checkbox"] {
             width: auto !important;
             padding: 0 !important;
@@ -191,7 +186,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-in { animation: fade-in-up 0.5s ease-out forwards; }
-
         @keyframes bounce-gentle {
             0%, 100% { transform: translateY(-5%); }
             50% { transform: translateY(0); }
@@ -202,7 +196,6 @@
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
         .toast { animation: slideIn 0.3s ease-out forwards; }
         .toast.hiding { animation: fadeOut 0.3s ease-out forwards; }
-
         #global-loader {
             background-image: radial-gradient(circle at center, white 0%, #f5f6f8 100%);
         }
@@ -224,16 +217,13 @@
     <div id="modal-gov-info" class="fixed inset-0 z-[70] hidden flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 transition-opacity duration-300">
         <div class="bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto relative animate-fade-in flex flex-col">
             <button onclick="closeGovInfoModal()" class="absolute top-3 right-3 bg-black/50 hover:bg-black/80 text-white rounded-full w-8 h-8 flex items-center justify-center z-10 transition"><i class="fas fa-times"></i></button>
-
             <div class="relative w-full bg-gray-200">
                 <img id="modal-gov-img" src="" class="w-full h-auto max-h-[60vh] object-contain mx-auto" onerror="this.src='https://placehold.co/600x400?text=No+Image'">
             </div>
-
             <div class="p-6 md:p-8 flex-grow">
                 <h2 id="modal-gov-title" class="text-xl md:text-2xl font-bold text-[#1A4A9A] mb-4 border-b pb-2">Title</h2>
                 <div id="modal-gov-desc" class="text-gray-700 text-sm md:text-base leading-relaxed whitespace-pre-wrap font-medium">Description</div>
             </div>
-
             <div class="p-4 bg-gray-50 border-t flex justify-end sticky bottom-0">
                 <button onclick="closeGovInfoModal()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-full font-bold text-sm transition">Tutup</button>
             </div>
@@ -250,34 +240,24 @@
                 <button onclick="closeHistoryModal()" class="text-gray-400 hover:text-red-500 transition"><i class="fas fa-times fa-lg"></i></button>
             </div>
             <div class="p-6 space-y-5">
-                <!-- Reference & Date -->
                 <div class="text-center bg-gray-50 p-4 rounded-lg border border-gray-100">
                     <div id="hist-modal-ref" class="text-xl font-mono font-bold text-gray-800 tracking-widest">REF123456</div>
                     <p id="hist-modal-date" class="text-xs text-gray-500 mt-1">Date</p>
                 </div>
-
-                <!-- Main Details Section -->
                 <div>
                     <h4 class="text-xs font-bold text-[#1A4A9A] uppercase border-b pb-1 mb-2">Maklumat Permohonan</h4>
-                    <div id="hist-modal-content" class="space-y-3 text-sm">
-                        <!-- Perincian 1, 2, Tarikh/Masa injected here -->
-                    </div>
+                    <div id="hist-modal-content" class="space-y-3 text-sm"></div>
                 </div>
-                <!-- Attachments Section -->
                 <div id="hist-modal-attachments-container" class="hidden">
                     <h4 class="text-xs font-bold text-[#1A4A9A] uppercase border-b pb-1 mb-2">Lampiran</h4>
-                    <div id="hist-modal-attachments" class="space-y-2 text-sm">
-                        <!-- Links injected here -->
-                    </div>
+                    <div id="hist-modal-attachments" class="space-y-2 text-sm"></div>
                 </div>
-                <!-- Status Section -->
                 <div>
                     <h4 class="text-xs font-bold text-[#1A4A9A] uppercase border-b pb-1 mb-2">Status Terkini</h4>
                     <div class="text-center py-2">
                         <span id="hist-modal-status" class="inline-block px-4 py-1.5 rounded-full text-sm font-bold shadow-sm">STATUS</span>
                     </div>
                 </div>
-                <!-- Completion / Feedback Report (Conditional) -->
                 <div id="hist-modal-report" class="hidden bg-green-50 p-4 rounded-lg border border-green-100 text-center mt-4">
                     <div id="hist-modal-report-title" class="text-green-700 font-bold text-sm mb-1"><i class="fas fa-check-circle mr-1"></i> Tindakan Selesai</div>
                     <p id="hist-modal-end-date" class="text-xs text-gray-600 mb-0 hidden">Tarikh Selesai: -</p>
@@ -292,10 +272,6 @@
         </div>
     </div>
     <!-- SUCCESS POPUP MODAL -->
-    <!-- NOTA: element ni dirujuk dalam JS asal (popup-success-msg / modal-success-popup)
-         tapi HTML-nya tiada dalam source yang diberi untuk review. Direkonstruksi ringkas
-         di sini supaya fungsi popup lepas submit borang tak pecah. Kalau versi asal kau
-         berbeza, gantikan blok ni ikut design sedia ada. -->
     <div id="modal-success-popup" class="fixed inset-0 z-[75] hidden flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 transition-opacity duration-300">
         <div class="bg-white rounded-lg shadow-2xl w-full max-w-md p-8 text-center animate-fade-in">
             <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-check text-green-600 text-3xl"></i></div>
@@ -303,7 +279,7 @@
             <button onclick="closeSuccessPopup()" class="btn-primary w-full py-2.5 px-6">OK</button>
         </div>
     </div>
-    <!-- PRIVACY POLICY MODAL (BAHARU) -->
+    <!-- PRIVACY POLICY MODAL -->
     <div id="modal-privacy-policy" class="fixed inset-0 z-[75] hidden flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 transition-opacity duration-300">
         <div class="bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[85vh] overflow-y-auto relative animate-fade-in">
             <div class="p-6 border-b flex justify-between items-center sticky top-0 bg-white z-10">
@@ -337,9 +313,7 @@
                 </div>
             </div>
             <div class="flex items-center space-x-3">
-                <div id="user-header-info" class="hidden md:flex items-center mr-2 text-white text-xs text-right">
-                    <!-- User info injected here -->
-                </div>
+                <div id="user-header-info" class="hidden md:flex items-center mr-2 text-white text-xs text-right"></div>
                 <button onclick="toggleLanguage()" class="flex items-center space-x-2 bg-blue-800 hover:bg-blue-700 text-white px-3 py-1.5 rounded text-xs font-semibold transition border border-blue-700 shadow-sm">
                     <i class="fas fa-globe"></i>
                     <span id="lang-display">BM</span>
@@ -351,7 +325,6 @@
     <main class="container mx-auto p-4 flex-grow max-w-5xl mt-20 relative z-10">
         <!-- VIEW 1: HERO LANDING -->
         <div id="view-home" class="view-section space-y-8 animate-fade-in">
-            <!-- Hero Banner -->
             <div class="card p-0 overflow-hidden relative">
                 <div id="slider-wrapper" class="slider-container group bg-gray-200">
                     <div class="slider-overlay"></div>
@@ -367,7 +340,6 @@
                     <div id="news-ticker-content" class="ticker-move"></div>
                 </div>
             </div>
-            <!-- Quick Action Grid -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div id="action-enter-system" onclick="checkSystemAccess()" class="card card-hover p-6 cursor-pointer text-center flex flex-col items-center justify-center min-h-[160px] group border-t-4 border-t-[#1A4A9A]">
                     <div id="icon-enter-system" class="w-14 h-14 mb-4 rounded-full bg-blue-50 flex items-center justify-center text-[#1A4A9A] group-hover:bg-[#1A4A9A] group-hover:text-white transition duration-300">
@@ -383,7 +355,6 @@
                     <h3 class="text-base font-bold text-gray-800" data-i18n="action_check">Semak Status</h3>
                     <p class="text-xs text-gray-500 mt-1 leading-relaxed" data-i18n="action_check_desc">Jejak permohonan anda</p>
                 </div>
-                <!-- INFO KERAJAAN AKTIF -->
                 <div onclick="showView('view-gov-info')" class="card card-hover p-6 cursor-pointer text-center flex flex-col items-center justify-center min-h-[160px] group border-t-4 border-t-yellow-500">
                     <div class="w-14 h-14 mb-4 rounded-full bg-yellow-50 flex items-center justify-center text-yellow-600 group-hover:bg-yellow-500 group-hover:text-white transition duration-300">
                         <i class="fas fa-info text-2xl"></i>
@@ -391,8 +362,6 @@
                     <h3 class="text-base font-bold text-gray-800" data-i18n="action_info">Info Kerajaan</h3>
                     <p class="text-xs text-gray-500 mt-1" data-i18n="action_info_desc">Biasiswa, Bantuan & Info Semasa</p>
                 </div>
-
-                <!-- Contact Us Button -->
                 <div onclick="showView('view-contact')" class="card card-hover p-6 cursor-pointer text-center flex flex-col items-center justify-center min-h-[160px] group border-t-4 border-t-green-600">
                     <div class="w-14 h-14 mb-4 rounded-full bg-green-50 flex items-center justify-center text-green-600 group-hover:bg-green-600 group-hover:text-white transition duration-300">
                         <i class="fas fa-phone text-2xl"></i>
@@ -401,8 +370,6 @@
                     <p class="text-xs text-gray-500 mt-1" data-i18n="action_contact_desc">Tanya khabar & aduan terus</p>
                 </div>
             </div>
-
-            <!-- Quick Links -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="card p-5 flex items-center space-x-4">
                     <div class="bg-blue-100 p-3 rounded text-blue-700"><i class="fas fa-clock fa-lg"></i></div>
@@ -431,19 +398,15 @@
                     <h2 class="text-xl font-bold text-[#1A4A9A]">Akses Sistem</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- LEFT: Login/Signup -->
                     <div class="card p-8 border-t-4 border-t-[#1A4A9A]">
                         <div class="text-center mb-6">
                             <h3 class="text-lg font-bold text-gray-800">Ahli Berdaftar</h3>
                             <p class="text-xs text-gray-500">Log masuk untuk jejak sejarah aduan anda</p>
                         </div>
-
-                        <!-- Toggle Login/Signup -->
                         <div class="flex border border-gray-200 rounded-lg p-1 mb-6 bg-gray-50">
                             <button onclick="toggleAuthMode('login')" id="tab-login" class="flex-1 py-2 text-sm font-bold rounded shadow-sm bg-white text-[#1A4A9A]">Log Masuk</button>
                             <button onclick="toggleAuthMode('signup')" id="tab-signup" class="flex-1 py-2 text-sm font-bold rounded text-gray-500 hover:text-gray-700">Daftar Baru</button>
                         </div>
-                        <!-- Login Form -->
                         <form id="form-login" class="space-y-4" onsubmit="handleLogin(event)">
                             <input type="email" id="login-email" placeholder="Email" required>
                             <input type="password" id="login-pass" placeholder="Kata Laluan" required>
@@ -452,7 +415,6 @@
                             </div>
                             <button type="submit" class="btn-primary w-full py-2.5">LOG MASUK</button>
                         </form>
-                        <!-- Forgot Password Form (Hidden by default) -->
                         <form id="form-forgot-pass" class="space-y-4 hidden" onsubmit="handleForgotPassword(event)">
                             <p class="text-xs text-gray-600 mb-2">Masukkan emel anda untuk reset kata laluan.</p>
                             <input type="email" id="forgot-email" placeholder="Email Pendaftaran" required>
@@ -461,14 +423,12 @@
                                 <button type="button" onclick="hideForgotPassword()" class="bg-gray-200 text-gray-600 px-4 rounded text-xs">BATAL</button>
                             </div>
                         </form>
-                        <!-- Signup Form -->
                         <form id="form-signup" class="space-y-4 hidden" onsubmit="handleSignup(event)">
                             <input type="text" id="signup-name" placeholder="Nama Penuh" required>
                             <input type="text" id="signup-ic" placeholder="No. Kad Pengenalan (Tanpa -)" pattern="\d{12}" required>
                             <input type="tel" id="signup-phone" placeholder="No. Telefon" required>
                             <input type="email" id="signup-email" placeholder="Email" required>
                             <input type="password" id="signup-pass" placeholder="Kata Laluan (Min 6 aksara)" minlength="6" required>
-                            <!-- BAHARU: consent PDPA -->
                             <label class="flex items-start gap-2 text-xs text-gray-600 leading-snug">
                                 <input type="checkbox" id="signup-consent" required>
                                 <span>Saya bersetuju data peribadi (termasuk No. IC) digunakan untuk tujuan permohonan/aduan melalui sistem ini. <button type="button" onclick="openPrivacyModal()" class="text-blue-600 underline font-semibold">Baca Dasar Privasi.</button></span>
@@ -476,7 +436,6 @@
                             <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold w-full py-2.5 rounded transition">DAFTAR AKAUN</button>
                         </form>
                     </div>
-                    <!-- RIGHT: Guest -->
                     <div class="card p-8 border-t-4 border-t-gray-400 bg-gray-50 flex flex-col justify-center text-center">
                         <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 text-gray-500 shadow-sm"><i class="fas fa-user-secret text-2xl"></i></div>
                         <h3 class="text-lg font-bold text-gray-800 mb-2">Teruskan Sebagai Tetamu</h3>
@@ -500,7 +459,6 @@
                 </div>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="category-grid">
-                <!-- Categories injected/handled by JS -->
                 <div id="cat-Jemputan" onclick="startForm('Jemputan')" class="card card-hover p-6 cursor-pointer text-center group relative"><div class="w-12 h-12 mx-auto bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mb-3 group-hover:bg-purple-600 group-hover:text-white transition"><i class="fas fa-envelope-open-text text-xl"></i></div><h3 class="font-bold text-sm text-gray-700" data-i18n="cat_invite">Jemputan Rasmi</h3></div>
                 <div id="cat-Permohonan" onclick="startForm('Permohonan')" class="card card-hover p-6 cursor-pointer text-center group relative"><div class="w-12 h-12 mx-auto bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-3 group-hover:bg-green-600 group-hover:text-white transition"><i class="fas fa-hand-holding-heart text-xl"></i></div><h3 class="font-bold text-sm text-gray-700" data-i18n="cat_aid">Mohon Bantuan</h3></div>
                 <div id="cat-Aduan" onclick="startForm('Aduan')" class="card card-hover p-6 cursor-pointer text-center group relative"><div class="w-12 h-12 mx-auto bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-3 group-hover:bg-red-600 group-hover:text-white transition"><i class="fas fa-exclamation-triangle text-xl"></i></div><h3 class="font-bold text-sm text-gray-700" data-i18n="cat_report">Aduan Rakyat</h3></div>
@@ -509,7 +467,7 @@
                 <div id="cat-Sukarelawan" onclick="startForm('Sukarelawan')" class="card card-hover p-6 cursor-pointer text-center group relative"><div class="w-12 h-12 mx-auto bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mb-3 group-hover:bg-orange-600 group-hover:text-white transition"><i class="fas fa-users text-xl"></i></div><h3 class="font-bold text-sm text-gray-700" data-i18n="cat_volunteer">Sukarelawan</h3></div>
             </div>
         </div>
-        <!-- VIEW: EDIT PROFILE (NEW) -->
+        <!-- VIEW: EDIT PROFILE -->
         <div id="view-profile" class="view-section hidden pb-10">
             <div class="card p-6 md:p-8 max-w-2xl mx-auto">
                 <div class="flex items-center justify-between mb-6 border-b border-gray-200 pb-4">
@@ -555,7 +513,6 @@
                 </div>
             </div>
             <div id="history-list" class="space-y-4">
-                <!-- Content injected via JS -->
                  <p class="text-center text-gray-500 py-10">Memuatkan data...</p>
             </div>
         </div>
@@ -583,7 +540,6 @@
                         <div><label data-i18n="form_address">Alamat / Lokasi</label><textarea name="address" required rows="2"></textarea></div>
                     </div>
                     <div id="dynamic-fields" class="bg-gray-50/50 p-4 rounded-lg border border-gray-200"></div>
-                    <!-- BAHARU: consent PDPA -->
                     <label class="flex items-start gap-2 text-xs text-gray-600 leading-snug px-1">
                         <input type="checkbox" id="form-consent" required>
                         <span>Saya faham data peribadi (termasuk No. IC) yang saya berikan akan digunakan untuk memproses permohonan/aduan ini sahaja. <button type="button" onclick="openPrivacyModal()" class="text-blue-600 underline font-semibold">Baca Dasar Privasi.</button></span>
@@ -627,13 +583,11 @@
                     <button onclick="checkStatus()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 rounded-md shadow transition"><span data-i18n="btn_check">Semak Sekarang</span></button>
                 </div>
                 <div id="status-result" class="mt-8 hidden border-t border-gray-100 pt-6">
-                    <div id="status-result-list" class="space-y-4">
-                        <!-- Result cards injected here -->
-                    </div>
+                    <div id="status-result-list" class="space-y-4"></div>
                 </div>
             </div>
         </div>
-        <!-- NEW VIEW: CONTACT US -->
+        <!-- VIEW: CONTACT US -->
         <div id="view-contact" class="view-section hidden">
             <div class="flex justify-between items-center mb-6 bg-white p-4 rounded-lg shadow-sm border border-gray-200">
                 <div>
@@ -642,9 +596,7 @@
                 </div>
                 <button onclick="showView('view-home')" class="text-gray-400 hover:text-red-500 transition px-2"><i class="fas fa-times fa-lg"></i></button>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Contact cards same as before -->
                  <a href="mailto:pusatkhidmatn16karambunai@gmail.com" class="card card-hover p-8 flex flex-col items-center justify-center text-center group border-t-4 border-red-500">
                     <div class="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition"><i class="fas fa-envelope text-2xl"></i></div>
                     <h3 class="font-bold text-lg text-gray-800 mb-2">Emel Rasmi</h3>
@@ -662,7 +614,7 @@
                 </a>
             </div>
         </div>
-        <!-- NEW VIEW: GOV INFO -->
+        <!-- VIEW: GOV INFO -->
         <div id="view-gov-info" class="view-section hidden">
             <div class="flex justify-between items-center mb-6 bg-white p-4 rounded-lg shadow-sm border border-gray-200">
                 <div>
@@ -671,23 +623,49 @@
                 </div>
                 <button onclick="showView('view-home')" class="text-gray-400 hover:text-red-500 transition px-2"><i class="fas fa-times fa-lg"></i></button>
             </div>
-
             <div id="gov-info-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Content injected via JS -->
                 <p class="text-center col-span-3 text-gray-500">Tiada maklumat semasa.</p>
             </div>
         </div>
         <!-- VIEW 6: ADMIN LOGIN -->
+        <!-- BAHARU v5: log masuk admin kini melalui Apps Script (kata laluan dalam
+             Script Properties), BUKAN Firebase. Satu kata laluan sahaja untuk
+             portal ini dan Dashboard Admin. -->
         <div id="view-admin-login" class="view-section hidden">
             <div class="max-w-sm mx-auto mt-16 card p-8 text-center shadow-xl">
                 <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-100"><i class="fas fa-shield-alt text-[#1A4A9A] text-2xl"></i></div>
                 <h3 class="font-bold text-gray-800 mb-6 text-lg" data-i18n="admin_login_title">Log Masuk Pentadbir</h3>
-                <div class="space-y-4">
+
+                <!-- Borang log masuk -->
+                <div id="admin-login-form" class="space-y-4">
                     <input type="email" id="admin-id" placeholder="Email Admin" class="text-center bg-gray-50">
                     <input type="password" id="admin-pass" data-i18n-placeholder="placeholder_pass" placeholder="Kata Laluan" class="text-center bg-gray-50">
                     <button onclick="adminLogin()" class="w-full btn-primary py-2.5" data-i18n="btn_login">LOG MASUK</button>
-                    <button onclick="showView('view-home')" class="text-xs text-gray-400 hover:text-gray-600 mt-2" data-i18n="btn_cancel">BATAL</button>
+                    <button onclick="showAdminForgot()" class="text-xs text-blue-600 hover:underline font-semibold block w-full">Lupa Kata Laluan?</button>
+                    <button onclick="showView('view-home')" class="text-xs text-gray-400 hover:text-gray-600 mt-1" data-i18n="btn_cancel">BATAL</button>
                 </div>
+
+                <!-- Lupa kata laluan: langkah 1 (minta kod) -->
+                <div id="admin-forgot-step1" class="space-y-4 hidden text-left">
+                    <p class="text-xs text-gray-600">Kod 6-digit akan dihantar ke emel admin berdaftar.</p>
+                    <input type="email" id="admin-forgot-email" placeholder="Emel Admin" class="text-center bg-gray-50">
+                    <button onclick="adminRequestCode()" class="w-full btn-primary py-2.5 text-xs">HANTAR KOD</button>
+                    <button onclick="hideAdminForgot()" class="text-xs text-gray-400 hover:text-gray-600 block w-full">KEMBALI</button>
+                </div>
+
+                <!-- Lupa kata laluan: langkah 2 (kod + kata laluan baharu) -->
+                <div id="admin-forgot-step2" class="space-y-3 hidden text-left">
+                    <label class="text-xs">Kod 6-Digit</label>
+                    <input type="text" id="admin-reset-code" maxlength="6" inputmode="numeric" placeholder="000000" class="text-center font-mono tracking-[0.3em] text-lg">
+                    <label class="text-xs">Kata Laluan Baharu (min 10 aksara)</label>
+                    <input type="password" id="admin-reset-pw1" placeholder="Kata laluan baharu">
+                    <label class="text-xs">Sahkan Kata Laluan</label>
+                    <input type="password" id="admin-reset-pw2" placeholder="Ulang kata laluan">
+                    <button onclick="adminSubmitReset()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded text-xs">TETAPKAN KATA LALUAN</button>
+                    <button onclick="hideAdminForgot()" class="text-xs text-gray-400 hover:text-gray-600 block w-full">BATAL</button>
+                </div>
+
+                <div id="admin-msg" class="hidden mt-4 text-xs rounded px-3 py-2 border"></div>
             </div>
         </div>
         <!-- VIEW 7: ADMIN PANEL -->
@@ -696,7 +674,6 @@
                 <h2 class="text-lg font-bold text-gray-800 flex items-center"><i class="fas fa-columns text-[#1A4A9A] mr-2"></i>Panel Pentadbir</h2>
                 <button onclick="adminLogout()" class="text-red-600 text-xs border border-red-200 bg-red-50 px-3 py-1.5 rounded hover:bg-red-100 font-medium">KELUAR</button>
             </div>
-            <!-- Global System Maintenance Toggle -->
             <div class="card p-6 border-l-4 border-l-yellow-400">
                 <h3 class="font-bold border-b border-gray-100 pb-2 mb-4 text-gray-700 text-sm uppercase tracking-wide flex items-center"><i class="fas fa-power-off mr-2 text-yellow-500"></i>Status Keseluruhan Sistem</h3>
                 <div class="flex items-center justify-between">
@@ -704,14 +681,12 @@
                     <button id="btn-sys-toggle" onclick="toggleMaintenance()" class="bg-white border border-yellow-500 text-yellow-600 px-4 py-2 rounded text-xs font-bold hover:bg-yellow-50 transition shadow-sm">NYAHAKTIFKAN</button>
                 </div>
             </div>
-            <!-- Category Control -->
             <div class="card p-6">
                 <h3 class="font-bold border-b border-gray-100 pb-2 mb-4 text-gray-700 text-sm uppercase flex items-center"><i class="fas fa-list-ul mr-2 text-blue-500"></i>Kawalan Kategori Perkhidmatan</h3>
                 <p class="text-xs text-gray-500 mb-4">Hidupkan atau matikan kategori perkhidmatan secara individu.</p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="admin-category-toggles"></div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Manage Info (Hours & Location) -->
                 <div class="card p-6">
                     <h3 class="font-bold border-b border-gray-100 pb-2 mb-4 text-gray-700 text-sm uppercase">Tetapan Info Pejabat</h3>
                     <div class="space-y-4">
@@ -721,7 +696,6 @@
                         <button onclick="saveInfoConfig()" class="btn-primary w-full text-xs py-2 rounded">KEMASKINI INFO</button>
                     </div>
                 </div>
-                <!-- Manage Memos -->
                 <div class="card p-6">
                     <h3 class="font-bold border-b border-gray-100 pb-2 mb-4 text-gray-700 text-sm uppercase">Pengumuman (Ticker)</h3>
                     <div class="flex gap-2 mb-4">
@@ -730,7 +704,6 @@
                     </div>
                     <ul id="admin-memo-list" class="text-sm space-y-2 text-gray-600 max-h-40 overflow-y-auto"></ul>
                 </div>
-                <!-- Manage Slider -->
                 <div class="card p-6 md:col-span-2">
                     <h3 class="font-bold border-b border-gray-100 pb-2 mb-4 text-gray-700 text-sm uppercase">Galeri Utama</h3>
                     <div class="flex gap-2 mb-4">
@@ -739,7 +712,6 @@
                     </div>
                     <div id="admin-img-list" class="grid grid-cols-3 gap-2"></div>
                 </div>
-                <!-- NEW: Manage Gov Info -->
                 <div class="card p-6 md:col-span-2 border-t-4 border-yellow-400">
                     <h3 class="font-bold border-b border-gray-100 pb-2 mb-4 text-gray-700 text-sm uppercase flex items-center"><i class="fas fa-graduation-cap text-yellow-600 mr-2"></i>Tetapan Info Kerajaan (Biasiswa/Bantuan)</h3>
                     <div class="bg-yellow-50 p-4 rounded mb-4 border border-yellow-100">
@@ -753,9 +725,7 @@
                         </div>
                         <button onclick="addGovInfo()" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded text-xs w-full">TAMBAH INFO</button>
                     </div>
-                    <div id="admin-gov-list" class="space-y-2">
-                        <!-- List populated by JS -->
-                    </div>
+                    <div id="admin-gov-list" class="space-y-2"></div>
                 </div>
             </div>
         </div>
@@ -777,15 +747,30 @@
     <!-- JAVASCRIPT LOGIC -->
     <script>
         // --- GOOGLE APPS SCRIPT URL ---
-        // Nota: kekalkan URL yang sama selagi kau "New version" deployment sedia ada
-        // (Deploy > Manage deployments > Edit > New version). Kalau kau buat NEW
-        // deployment pula, URL exec akan bertukar — update baris ni ikut URL baharu.
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwo9Y-mD4xWimEZkHBwy1XDQOb9UYgUGDX6HECR98eE8czpnHhPLeZ6EKt1_0IFs3yC/exec";
-        // --- TRANSLATION DATA ---
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwOfdm816XIwTK45RSsvSWwdZg80PLYp_ZqDvFOOCYp1mTdnWfdO2EGqUV2urPHkwU/exec";
+
+        // =====================================================================
+        // BAHARU v5 — AUTH ADMIN
+        // =====================================================================
+        // Log masuk admin sekarang melalui Apps Script (kata laluan SHA-256+salt
+        // dalam Script Properties) dan pulangkan SESSION TOKEN. Ia TIDAK lagi
+        // guna Firebase. Sebabnya:
+        //   1. Satu kata laluan sahaja untuk portal ni DAN Dashboard Admin —
+        //      sebelum ni dua tempat berlainan (Firebase vs Script Properties).
+        //   2. update_config dulu hantar idToken Firebase, yang perlukan Apps
+        //      Script panggil Google Identity Toolkit (scope external_request).
+        //      Itu punca ralat "Unauthorized" berulang. Session token tak perlu
+        //      panggilan luar langsung.
+        // Firebase KEKAL sepenuhnya untuk akaun RAKYAT (daftar/log masuk/profil).
+        // =====================================================================
+        let adminSessionToken = "";
+        try { adminSessionToken = sessionStorage.getItem('karadi_admin_token') || ""; } catch (e) { adminSessionToken = ""; }
+
         let currentLang = 'ms';
-        let currentUser = null; // Store Firebase User
-        let userProfile = null; // Store Firestore Profile
-        let currentHistoryData = []; // Store History Data Globally
+        let currentUser = null; // Firebase User (rakyat)
+        let userProfile = null; // Firestore profile
+        let currentHistoryData = [];
+
         const translations = {
             'ms': {
                 'loading_text': 'Memuatkan Sistem...',
@@ -911,40 +896,29 @@
             }
         };
 
-        // --- BAHARU: XSS-safe render helpers ---
-        // Escape teks sebelum inject ke innerHTML (elak stored XSS dari memo/gov-info/
-        // butiran aduan yang dipaparkan). Guna textContent trick — tak perlu dependency luar.
+        // --- XSS-safe render helpers ---
         function escapeHtml(str) {
             const div = document.createElement('div');
             div.textContent = (str === null || str === undefined) ? '' : String(str);
             return div.innerHTML;
         }
-        // Escape dulu, baru linkify URL yang dijumpai dalam teks (untuk Info Kerajaan desc).
         function safeLinkify(str) {
             const escaped = escapeHtml(str);
             const urlRegex = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
             return escaped.replace(urlRegex, (url) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-bold hover:underline break-all">${url}</a>`);
         }
-
         // --- LOADER ---
         function showLoader(textKey = 'loading_text', duration = 0, callback) {
             const loader = document.getElementById('global-loader');
             const textEl = document.getElementById('loader-text');
             textEl.innerText = translations[currentLang][textKey];
             loader.classList.remove('opacity-0', 'pointer-events-none');
-
             if (duration > 0) {
-                setTimeout(() => {
-                    hideLoader();
-                    if (callback) callback();
-                }, duration);
-            } else if (callback) {
-                callback();
-            }
+                setTimeout(() => { hideLoader(); if (callback) callback(); }, duration);
+            } else if (callback) { callback(); }
         }
         function hideLoader() {
-            const loader = document.getElementById('global-loader');
-            loader.classList.add('opacity-0', 'pointer-events-none');
+            document.getElementById('global-loader').classList.add('opacity-0', 'pointer-events-none');
         }
         // --- NOTIFICATIONS ---
         function showNotification(message, type = 'info') {
@@ -973,38 +947,26 @@
             updateHomeUI();
             if(!document.getElementById('view-dashboard').classList.contains('hidden')) updateDashboardUI();
         }
-        // --- PRIVACY MODAL (BAHARU) ---
-        window.openPrivacyModal = function() {
-            document.getElementById('modal-privacy-policy').classList.remove('hidden');
-        }
-        window.closePrivacyModal = function() {
-            document.getElementById('modal-privacy-policy').classList.add('hidden');
-        }
-        // --- AUTH & FIREBASE LOGIC ---
+        // --- PRIVACY MODAL ---
+        window.openPrivacyModal = function() { document.getElementById('modal-privacy-policy').classList.remove('hidden'); }
+        window.closePrivacyModal = function() { document.getElementById('modal-privacy-policy').classList.add('hidden'); }
+        // --- AUTH RAKYAT (FIREBASE) ---
         function toggleAuthMode(mode) {
             const loginForm = document.getElementById('form-login');
             const signupForm = document.getElementById('form-signup');
             const btnLogin = document.getElementById('tab-login');
             const btnSignup = document.getElementById('tab-signup');
-            const forgotForm = document.getElementById('form-forgot-pass'); // Ensure this is hidden when toggling
-            forgotForm.classList.add('hidden');
+            document.getElementById('form-forgot-pass').classList.add('hidden');
             if (mode === 'login') {
-                loginForm.classList.remove('hidden');
-                signupForm.classList.add('hidden');
-                btnLogin.classList.add('bg-white', 'text-[#1A4A9A]', 'shadow-sm');
-                btnLogin.classList.remove('text-gray-500');
-                btnSignup.classList.remove('bg-white', 'text-[#1A4A9A]', 'shadow-sm');
-                btnSignup.classList.add('text-gray-500');
+                loginForm.classList.remove('hidden'); signupForm.classList.add('hidden');
+                btnLogin.classList.add('bg-white', 'text-[#1A4A9A]', 'shadow-sm'); btnLogin.classList.remove('text-gray-500');
+                btnSignup.classList.remove('bg-white', 'text-[#1A4A9A]', 'shadow-sm'); btnSignup.classList.add('text-gray-500');
             } else {
-                loginForm.classList.add('hidden');
-                signupForm.classList.remove('hidden');
-                btnSignup.classList.add('bg-white', 'text-[#1A4A9A]', 'shadow-sm');
-                btnSignup.classList.remove('text-gray-500');
-                btnLogin.classList.remove('bg-white', 'text-[#1A4A9A]', 'shadow-sm');
-                btnLogin.classList.add('text-gray-500');
+                loginForm.classList.add('hidden'); signupForm.classList.remove('hidden');
+                btnSignup.classList.add('bg-white', 'text-[#1A4A9A]', 'shadow-sm'); btnSignup.classList.remove('text-gray-500');
+                btnLogin.classList.remove('bg-white', 'text-[#1A4A9A]', 'shadow-sm'); btnLogin.classList.add('text-gray-500');
             }
         }
-        // --- Forgot Password Logic ---
         function showForgotPassword() {
             document.getElementById('form-login').classList.add('hidden');
             document.getElementById('form-forgot-pass').classList.remove('hidden');
@@ -1016,12 +978,10 @@
         async function handleForgotPassword(e) {
             e.preventDefault();
             const email = document.getElementById('forgot-email').value;
-
             showLoader('loading_text', 0);
             try {
                 await window.sendPasswordResetEmail(window.auth, email);
-                hideLoader();
-                hideForgotPassword();
+                hideLoader(); hideForgotPassword();
                 showNotification("Pautan reset kata laluan telah dihantar ke emel anda.", "success");
             } catch (error) {
                 hideLoader();
@@ -1034,15 +994,11 @@
         async function handleLogin(e) {
             e.preventDefault();
             if(!window.firebaseLoaded) { showNotification("Ralat Konfigurasi Firebase", "error"); return; }
-
             const email = document.getElementById('login-email').value;
             const pass = document.getElementById('login-pass').value;
-
             showLoader('loading_text', 0);
             try {
-                // Firebase automatically persists session
                 await window.signInWithEmailAndPassword(window.auth, email, pass);
-                // No manual redirect needed here, onAuthStateChanged handles it.
             } catch (error) {
                 hideLoader();
                 let msg = "Log masuk gagal.";
@@ -1064,18 +1020,9 @@
             try {
                 const userCredential = await window.createUserWithEmailAndPassword(window.auth, email, pass);
                 const user = userCredential.user;
-
-                // Store IC & Email in Firestore (as requested)
                 await window.setDoc(window.doc(window.db, "users", user.uid), {
-                    nama: name,
-                    email: email,
-                    ic: ic,
-                    phone: phone,
-                    uid: user.uid,
-                    address: "", // Initialize as empty
-                    createdAt: new Date()
+                    nama: name, email: email, ic: ic, phone: phone, uid: user.uid, address: "", createdAt: new Date()
                 });
-                // onAuthStateChanged handles redirect
             } catch (error) {
                 hideLoader();
                 let msg = "Pendaftaran gagal.";
@@ -1085,29 +1032,21 @@
             }
         }
         function handleGuestAccess() {
-            currentUser = null;
-            userProfile = null;
-            updateDashboardUI();
-            showView('view-dashboard');
+            currentUser = null; userProfile = null;
+            updateDashboardUI(); showView('view-dashboard');
         }
         function handleLogout() {
-            if (currentUser) {
-                window.signOut(window.auth);
-                currentUser = null;
-                userProfile = null;
-            }
+            if (currentUser) { window.signOut(window.auth); currentUser = null; userProfile = null; }
             showView('view-home');
         }
-        // --- PROFILE EDIT LOGIC ---
+        // --- PROFILE EDIT ---
         function openProfile() {
             if (!currentUser || !userProfile) return;
-
             document.getElementById('edit-email').value = userProfile.email || '';
             document.getElementById('edit-name').value = userProfile.nama || '';
             document.getElementById('edit-ic').value = userProfile.ic || '';
             document.getElementById('edit-phone').value = userProfile.phone || '';
             document.getElementById('edit-address').value = userProfile.address || '';
-
             showView('view-profile');
         }
         async function handleUpdateProfile(e) {
@@ -1120,20 +1059,11 @@
             showLoader('loading_text', 0);
             try {
                 const userRef = window.doc(window.db, "users", currentUser.uid);
-                await window.updateDoc(userRef, {
-                    nama: newName,
-                    ic: newIc,
-                    phone: newPhone,
-                    address: newAddress
-                });
-                // Update local object immediately to reflect changes without reload
-                userProfile.nama = newName;
-                userProfile.ic = newIc;
-                userProfile.phone = newPhone;
-                userProfile.address = newAddress;
+                await window.updateDoc(userRef, { nama: newName, ic: newIc, phone: newPhone, address: newAddress });
+                userProfile.nama = newName; userProfile.ic = newIc; userProfile.phone = newPhone; userProfile.address = newAddress;
                 hideLoader();
                 showNotification("Profil berjaya dikemaskini!", "success");
-                showView('view-dashboard'); // Return to dashboard
+                showView('view-dashboard');
             } catch (error) {
                 hideLoader();
                 console.error("Profile update error:", error);
@@ -1149,23 +1079,22 @@
             'Maklum Balas': { fields: `<h3 class="text-[#1A4A9A] text-sm font-bold uppercase border-b border-blue-200 pb-2 mb-4 mt-6">B. Butiran Cadangan</h3><div class="mb-4"><label>Tajuk Cadangan</label><input type="text" name="option_select"></div><div class="mb-4"><label>Huraian & Kesan Kepada Komuniti</label><textarea name="detail_1" rows="4"></textarea></div><div class="mb-4"><label>Lampiran (Gambar/PDF)</label><input type="file" multiple accept=".pdf,image/*" class="border p-2 rounded bg-white w-full"></div>` },
             'Sukarelawan': { fields: `<h3 class="text-[#1A4A9A] text-sm font-bold uppercase border-b border-blue-200 pb-2 mb-4 mt-6">B. Profil Sukarelawan</h3><div class="mb-4"><label>Minat Utama</label><select name="option_select"><option>Gotong Royong</option><option>Bantuan Bencana</option><option>Pengurusan Acara</option><option>Pendidikan / Tuisyen</option></select></div><div class="mb-4"><label>Kemahiran Khas</label><input type="text" name="detail_1" placeholder="Contoh: Memasak, Memandu Lori, Perubatan"></div><div class="mb-4"><label>Ketersediaan</label><input type="text" name="detail_2" placeholder="Hujung Minggu Sahaja / Bila-bila"></div>` }
         };
-        // --- INIT DATA (OPTIMIZED) ---
+        // --- INIT DATA ---
         async function fetchGlobalConfig() {
             if(APPS_SCRIPT_URL && APPS_SCRIPT_URL !== "URL_APPSCRIPT_ANDA_DI_SINI") {
                 try {
                     const response = await fetch(APPS_SCRIPT_URL);
                     const data = await response.json();
-
                     if(data.slides && data.slides.length > 0) localStorage.setItem('app_slides', JSON.stringify(data.slides));
                     if(data.memos && data.memos.length > 0) localStorage.setItem('app_memos', JSON.stringify(data.memos));
                     if(data.info) localStorage.setItem('app_info', JSON.stringify(data.info));
-                    if(data.govInfo && data.govInfo.length > 0) localStorage.setItem('app_gov_info', JSON.stringify(data.govInfo)); // NEW
-
+                    if(data.govInfo && data.govInfo.length > 0) localStorage.setItem('app_gov_info', JSON.stringify(data.govInfo));
+                    // BAHARU v5.1 — dua field ni sekarang MEMANG dipulangkan oleh
+                    // Apps Script (dulu sentiasa undefined, sebab tu tak sync).
                     if(typeof data.maintenance !== 'undefined') localStorage.setItem('app_maintenance', data.maintenance);
                     if(data.categoryStatus) localStorage.setItem('app_category_status', JSON.stringify(data.categoryStatus));
-                    // Update UI immediately if we are on home
                     if(document.getElementById('view-home').classList.contains('hidden') === false) {
-                        updateHomeUI(); // Check maintenance mode
+                        updateHomeUI();
                         if (typeof initSlider === "function") initSlider();
                         if (typeof loadMemosTicker === "function") loadMemosTicker();
                         if (typeof updateInfoUI === "function") updateInfoUI();
@@ -1175,41 +1104,40 @@
                 } catch (e) { console.warn("Background config fetch failed (non-critical):", e); }
             }
         }
-        // BAHARU: idToken disertakan, mode:'no-cors' dibuang supaya response boleh
-        // dibaca & disahkan (Content-Type: text/plain elak CORS preflight kat Apps Script).
+        // BAHARU v5: guna sessionToken (bukan idToken Firebase).
         async function syncConfigToCloud() {
-            if(APPS_SCRIPT_URL && APPS_SCRIPT_URL !== "URL_APPSCRIPT_ANDA_DI_SINI") {
-                if (!currentUser) { showNotification("Sesi admin tidak sah. Sila log masuk semula.", "error"); return; }
-                const slides = JSON.parse(localStorage.getItem('app_slides'));
-                const memos = JSON.parse(localStorage.getItem('app_memos'));
-                const info = JSON.parse(localStorage.getItem('app_info'));
-                const govInfo = JSON.parse(localStorage.getItem('app_gov_info'));
-                const maintenance = localStorage.getItem('app_maintenance');
-                const categoryStatus = JSON.parse(localStorage.getItem('app_category_status'));
-
-                try {
-                    const idToken = await currentUser.getIdToken();
-                    const response = await fetch(APPS_SCRIPT_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                        body: JSON.stringify({
-                            action: 'update_config',
-                            idToken: idToken,
-                            slides: slides,
-                            memos: memos,
-                            info: info,
-                            govInfo: govInfo,
-                            maintenance: maintenance,
-                            categoryStatus: categoryStatus
-                        })
-                    });
-                    const result = await response.json();
-                    if (result.status === 'success') {
-                        showNotification("Data disinkronasi ke awan.", "success");
-                    } else {
-                        showNotification(result.message || "Ralat sinkronasi ke awan.", "error");
-                    }
-                } catch (e) { showNotification("Ralat sinkronasi ke awan.", "error"); }
+            if(!APPS_SCRIPT_URL || APPS_SCRIPT_URL === "URL_APPSCRIPT_ANDA_DI_SINI") return false;
+            if (!adminSessionToken) { showNotification("Sesi admin tamat. Sila log masuk semula.", "error"); return false; }
+            const slides = JSON.parse(localStorage.getItem('app_slides'));
+            const memos = JSON.parse(localStorage.getItem('app_memos'));
+            const info = JSON.parse(localStorage.getItem('app_info'));
+            const govInfo = JSON.parse(localStorage.getItem('app_gov_info'));
+            const maintenance = localStorage.getItem('app_maintenance');
+            const categoryStatus = JSON.parse(localStorage.getItem('app_category_status'));
+            try {
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        action: 'update_config',
+                        sessionToken: adminSessionToken,
+                        slides: slides, memos: memos, info: info, govInfo: govInfo,
+                        maintenance: maintenance, categoryStatus: categoryStatus
+                    })
+                });
+                const raw = await response.text();
+                console.log('[KARA-Di] update_config →', raw.slice(0, 300));
+                const result = JSON.parse(raw);
+                if (result.status === 'success') {
+                    showNotification("Tetapan disimpan & disegerakkan.", "success");
+                    return true;
+                }
+                showNotification(result.message || "Ralat sinkronasi ke awan.", "error");
+                if (/sesi|session|log masuk/i.test(result.message || "")) adminLogout();
+                return false;
+            } catch (e) {
+                showNotification("Ralat sinkronasi: " + e.message, "error");
+                return false;
             }
         }
         // Init localStorage if missing
@@ -1221,7 +1149,6 @@
             location: "Pejabat ADUN Karambunai",
             mapLink: "https://maps.app.goo.gl/JtT8C5dBBjkYmL5w8"
         }));
-        // NEW DEFAULT GOV INFO
         if (!localStorage.getItem('app_gov_info')) localStorage.setItem('app_gov_info', JSON.stringify([
             { title: "Bantuan Pembelajaran Tinggi", img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=500", desc: "Permohonan kini dibuka untuk pelajar IPTA/IPTS." },
             { title: "Inisiatif Digital", img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500", desc: "Kelas komputer percuma untuk warga emas setiap Ahad." }
@@ -1232,35 +1159,22 @@
             localStorage.setItem('app_category_status', JSON.stringify(defaultStatus));
         }
         // --- NAVIGATION & UI UPDATES ---
-
-        function hideAllViews() {
-            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
-        }
+        function hideAllViews() { document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden')); }
         function showView(view) {
             hideAllViews();
             document.getElementById(view).classList.remove("hidden");
             window.scrollTo(0, 0);
-            // User requested functions logic
             if (typeof updateInfoUI === "function") updateInfoUI();
             if (typeof initSlider === "function" && view === 'view-home') initSlider();
-            // Original logic combined safely
-            if(view === 'view-home') {
-                if (typeof loadMemosTicker === "function") loadMemosTicker();
-            }
-            if(view === 'view-admin-panel') {
-                if (typeof loadAdminPanel === "function") loadAdminPanel();
-            }
-            if(view === 'view-dashboard') {
-                if (typeof updateDashboardUI === "function") updateDashboardUI();
-            }
-            if(view === 'view-gov-info') {
-                if (typeof loadGovInfoUI === "function") loadGovInfoUI();
-            }
+            if(view === 'view-home') { if (typeof loadMemosTicker === "function") loadMemosTicker(); }
+            if(view === 'view-admin-panel') { if (typeof loadAdminPanel === "function") loadAdminPanel(); }
+            if(view === 'view-dashboard') { if (typeof updateDashboardUI === "function") updateDashboardUI(); }
+            if(view === 'view-gov-info') { if (typeof loadGovInfoUI === "function") loadGovInfoUI(); }
         }
         function checkSystemAccess() {
             const isMaintenance = localStorage.getItem('app_maintenance') === 'true';
             if(isMaintenance) showNotification("SISTEM SEDANG DISELENGGARA.", "warning");
-            else showView('view-auth'); // Route to Auth First
+            else showView('view-auth');
         }
         function updateHomeUI() {
             const isMaintenance = localStorage.getItem('app_maintenance') === 'true';
@@ -1290,49 +1204,59 @@
                 document.getElementById('display-location').innerText = info.location;
             }
         }
-
         function openMap() {
             const info = JSON.parse(localStorage.getItem('app_info'));
             const link = info && info.mapLink ? info.mapLink : "https://maps.app.goo.gl/JtT8C5dBBjkYmL5w8";
             window.open(link, '_blank');
         }
-        function toggleMaintenance() {
+        // BAHARU v5.1: await sync, dan kalau gagal — undo perubahan tempatan supaya
+        // paparan tak menipu (dulu localStorage berubah walaupun cloud gagal).
+        async function toggleMaintenance() {
             const current = localStorage.getItem('app_maintenance') === 'true';
             const newState = !current;
             localStorage.setItem('app_maintenance', newState);
             loadAdminPanel();
-            syncConfigToCloud(); // Sync after toggle
+            const ok = await syncConfigToCloud();
+            if (!ok) {
+                localStorage.setItem('app_maintenance', current);
+                loadAdminPanel();
+                return;
+            }
             showNotification(newState ? "Sistem Dinyahaktifkan" : "Sistem Diaktifkan Semula", newState ? "warning" : "success");
-            updateHomeUI(); // Update UI immediately
+            updateHomeUI();
         }
-        function toggleCategoryStatus(catKey) {
+        async function toggleCategoryStatus(catKey) {
             const statuses = JSON.parse(localStorage.getItem('app_category_status'));
+            const before = statuses[catKey];
             statuses[catKey] = !statuses[catKey];
             localStorage.setItem('app_category_status', JSON.stringify(statuses));
             loadAdminPanel();
-            syncConfigToCloud(); // Sync after toggle
-            showNotification(`Status kategori '${catKey}' dikemaskini.`, "info");
+            const ok = await syncConfigToCloud();
+            if (!ok) {
+                statuses[catKey] = before;
+                localStorage.setItem('app_category_status', JSON.stringify(statuses));
+                loadAdminPanel();
+                return;
+            }
+            showNotification(`Kategori '${catKey}' kini ${statuses[catKey] ? 'DIBUKA' : 'DITUTUP'}.`, "info");
         }
-
         function updateDashboardUI() {
             const statuses = JSON.parse(localStorage.getItem('app_category_status')) || {};
             const cats = ['Jemputan', 'Permohonan', 'Aduan', 'Temujanji', 'Maklum Balas', 'Sukarelawan'];
-
-            // Header Info Logic
             const headerInfo = document.getElementById('user-header-info');
             const welcomeMsg = document.getElementById('welcome-msg');
             const historyBtn = document.getElementById('btn-my-history');
-            const editProfileBtn = document.getElementById('btn-edit-profile'); // New Button
+            const editProfileBtn = document.getElementById('btn-edit-profile');
             if (currentUser) {
                 headerInfo.innerHTML = `<i class="fas fa-user-circle mr-2"></i> ${escapeHtml(currentUser.email)}`;
                 welcomeMsg.innerText = `Selamat Datang, Ahli Berdaftar.`;
                 historyBtn.classList.remove('hidden');
-                editProfileBtn.classList.remove('hidden'); // Show Edit Profile
+                editProfileBtn.classList.remove('hidden');
             } else {
                 headerInfo.innerHTML = `<span class="bg-gray-700 px-2 py-0.5 rounded">MOD TETAMU</span>`;
                 welcomeMsg.innerText = "Mod Tetamu: Sejarah tidak disimpan.";
                 historyBtn.classList.add('hidden');
-                editProfileBtn.classList.add('hidden'); // Hide Edit Profile
+                editProfileBtn.classList.add('hidden');
             }
             cats.forEach(cat => {
                 const el = document.getElementById(`cat-${cat}`);
@@ -1347,12 +1271,11 @@
                 } else el.classList.remove('card-disabled');
             });
         }
-        // --- SLIDER & MEMO LOGIC ---
+        // --- SLIDER & MEMO ---
         let slideIndex = 0; let slideInterval;
         function initSlider() {
             const container = document.getElementById('slider-wrapper');
-            const oldSlides = container.querySelectorAll('.slide');
-            oldSlides.forEach(s => s.remove());
+            container.querySelectorAll('.slide').forEach(s => s.remove());
             const slides = JSON.parse(localStorage.getItem('app_slides'));
             slides.forEach((src, idx) => {
                 const div = document.createElement('div');
@@ -1360,6 +1283,7 @@
                 div.style.backgroundImage = `url('${src}')`;
                 container.insertBefore(div, container.firstChild);
             });
+            slideIndex = 0;
             clearInterval(slideInterval);
             if(slides.length > 1) slideInterval = setInterval(() => { changeSlide(1); }, 6000);
         }
@@ -1380,11 +1304,10 @@
             else contentHTML = '<span class="ticker-item">Sistem Beroperasi Seperti Biasa.</span>';
             tickerContainer.innerHTML = contentHTML + contentHTML + contentHTML;
         }
-        // --- NEW: GOV INFO LOGIC ---
+        // --- GOV INFO ---
         function loadGovInfoUI() {
             const list = JSON.parse(localStorage.getItem('app_gov_info')) || [];
             const container = document.getElementById('gov-info-list');
-
             if (list.length === 0) {
                 container.innerHTML = '<p class="text-center col-span-3 text-gray-500 py-10">Tiada maklumat semasa.</p>';
                 return;
@@ -1405,73 +1328,61 @@
                 </div>
             `).join('');
         }
-        // --- GOV INFO MODAL LOGIC ---
         window.openGovInfoModal = function(index) {
             const list = JSON.parse(localStorage.getItem('app_gov_info')) || [];
             const item = list[index];
             if(!item) return;
             document.getElementById('modal-gov-img').src = item.img || 'https://placehold.co/600x400?text=No+Image';
             document.getElementById('modal-gov-title').innerText = item.title;
-
-            // BAHARU: escape dulu sebelum linkify (elak stored XSS)
             document.getElementById('modal-gov-desc').innerHTML = safeLinkify(item.desc || "");
-
             document.getElementById('modal-gov-info').classList.remove('hidden');
         }
-        window.closeGovInfoModal = function() {
-            document.getElementById('modal-gov-info').classList.add('hidden');
-        }
-        // --- HISTORY DETAIL LOGIC (NEW) ---
+        window.closeGovInfoModal = function() { document.getElementById('modal-gov-info').classList.add('hidden'); }
+        // --- HISTORY DETAIL ---
         window.openHistoryDetail = function(index) {
             const record = currentHistoryData[index];
             if(!record) return;
-            // Basic Info
             document.getElementById('hist-modal-cat').innerText = record.category;
             document.getElementById('hist-modal-ref').innerText = record.refNo;
             document.getElementById('hist-modal-date').innerText = record.date;
-
-            // Status Badge
             const statusEl = document.getElementById('hist-modal-status');
             const currentStatus = String(record.status).toUpperCase();
             statusEl.innerText = currentStatus;
-
             let statusClass = "bg-blue-100 text-blue-800 border border-blue-200";
             if(currentStatus.includes("SELESAI") || currentStatus.includes("LULUS")) statusClass = "bg-green-100 text-green-800 border border-green-200";
             else if (currentStatus.includes("TOLAK") || currentStatus.includes("GAGAL")) statusClass = "bg-red-100 text-red-800 border border-red-200";
             else if (currentStatus.includes("SEMAKAN") || currentStatus.includes("BARU") || currentStatus.includes("PROSES")) statusClass = "bg-yellow-100 text-yellow-800 border border-yellow-200";
-
             statusEl.className = `inline-block px-4 py-1.5 rounded-full text-sm font-bold shadow-sm ${statusClass}`;
-            // Completion / Feedback Report Section
             const reportDiv = document.getElementById('hist-modal-report');
             const reportTitle = document.getElementById('hist-modal-report-title');
             const endDateEl = document.getElementById('hist-modal-end-date');
             const linkBtn = document.getElementById('hist-modal-link');
-            // Extract from fullData index 12 (Date) & 13 (Link)
-            const endDate = (record.fullData && record.fullData[12]) ? record.fullData[12] : "-";
-            const reportLink = (record.fullData && record.fullData[13]) ? record.fullData[13] : "";
-            // Reset display
-            reportDiv.classList.add('hidden');
-            endDateEl.classList.add('hidden');
-            linkBtn.classList.add('hidden');
+            // Cari lajur "Tarikh Selesai" & "Laporan Penyelesaian" ikut NAMA header
+            // (bukan index tetap) — sebab sheet "Mohon Bantuan" tiada lajur Timestamp.
+            let endDate = "-", reportLink = "";
+            if (record.headers && record.fullData) {
+                record.headers.forEach((h, i) => {
+                    const hu = String(h).toUpperCase();
+                    if (hu.includes("TARIKH SELESAI") || hu.includes("TARIKH TINDAKAN")) endDate = record.fullData[i] || "-";
+                    if (hu.includes("LAPORAN")) reportLink = record.fullData[i] || "";
+                });
+            }
+            reportDiv.classList.add('hidden'); endDateEl.classList.add('hidden'); linkBtn.classList.add('hidden');
             let isCompleted = currentStatus.includes("SELESAI") || currentStatus.includes("LULUS");
-            let hasReport = reportLink && reportLink.startsWith('http');
+            let hasReport = reportLink && String(reportLink).startsWith('http');
             if (isCompleted || hasReport) {
                 reportDiv.classList.remove('hidden');
-
                 if (isCompleted) {
                     reportDiv.className = "mt-4 bg-green-50 p-4 rounded-lg border border-green-100 text-center";
                     reportTitle.className = "text-green-700 font-bold text-sm mb-1";
                     reportTitle.innerHTML = '<i class="fas fa-check-circle mr-1"></i> Tindakan Selesai';
-                    if(endDate && endDate !== "-") {
-                        endDateEl.innerText = "Tarikh Selesai: " + endDate;
-                        endDateEl.classList.remove('hidden');
-                    }
+                    if(endDate && endDate !== "-") { endDateEl.innerText = "Tarikh Selesai: " + endDate; endDateEl.classList.remove('hidden'); }
                     linkBtn.className = "w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-sm inline-flex items-center justify-center transition shadow-md mt-3";
                 } else {
                     reportDiv.className = "mt-4 bg-blue-50 p-4 rounded-lg border border-blue-100 text-center";
                     reportTitle.className = "text-blue-700 font-bold text-sm mb-1";
                     reportTitle.innerHTML = '<i class="fas fa-info-circle mr-1"></i> Maklum Balas Rasmi';
-                    endDateEl.classList.add('hidden'); // Hide completion date if not completed
+                    endDateEl.classList.add('hidden');
                     linkBtn.className = "w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm inline-flex items-center justify-center transition shadow-md mt-2";
                 }
                 if (hasReport) {
@@ -1480,40 +1391,23 @@
                     linkBtn.innerHTML = '<i class="fas fa-file-pdf mr-2"></i> Lihat Laporan';
                 }
             }
-            // --- SMART CONTENT EXTRACTION ---
             const contentDiv = document.getElementById('hist-modal-content');
             const attachContainer = document.getElementById('hist-modal-attachments-container');
             const attachDiv = document.getElementById('hist-modal-attachments');
-
-            let detailsHtml = "";
-            let attachmentsHtml = "";
-
+            let detailsHtml = "", attachmentsHtml = "";
             if(record.headers && record.fullData) {
-                // Column indices based on App Script mapping
-                // Columns to SKIP in the generic loop (System/Admin columns)
-                // Assuming standard: 0=Time, 1=Ref, 10=Status(in sheet index), 11=UID...
-
-                const skipHeaders = ['TIMESTAMP', 'REF NO', 'STATUS', 'UID', 'TARIKH SELESAI', 'LAPORAN', 'FILES', 'LAMPIRAN'];
-
+                const skipHeaders = ['TIMESTAMP', 'NO. RUJUKAN', 'REF NO', 'STATUS', 'UID', 'NO. KP', 'IC', 'NO. IC'];
                 record.headers.forEach((header, i) => {
-                    const hUpper = String(header).toUpperCase();
+                    const hUpper = String(header).toUpperCase().trim();
                     const val = record.fullData[i];
-
                     if(!val || String(val).trim() === '') return;
-                    // If it looks like a File Link (Drive/Image) -> Attachments
-                    if(String(val).startsWith('http') && (val.includes('drive') || val.includes('image') || val.includes('files'))) {
-                        // BAHARU: escape href & label
-                        attachmentsHtml += `<a href="${escapeHtml(val)}" target="_blank" class="block bg-gray-50 border p-2 rounded text-blue-600 hover:bg-blue-50 transition truncate"><i class="fas fa-paperclip mr-2"></i> ${escapeHtml(hUpper)}</a>`;
-                    }
-                    // Else if it's NOT a system column -> Details
-                    else if (!skipHeaders.includes(hUpper) && i !== 10 && i !== 11 && i !== 12 && i !== 13) {
-                         // Clean Header Display
-                         let label = header.replace(/_/g, ' ');
-                         // Formatting specific keys for better UX
-                         if(hUpper.includes("DETAIL") || hUpper.includes("PERINCIAN")) label = "Perincian";
-                         if(hUpper.includes("DATE") || hUpper.includes("TARIKH")) label = "Tarikh / Masa";
-
-                         // BAHARU: escape label & value (elak stored XSS dari perincian aduan)
+                    if(hUpper.includes("TARIKH SELESAI") || hUpper.includes("TARIKH TINDAKAN") || hUpper.includes("LAPORAN")) return;
+                    if(String(val).startsWith('http')) {
+                        attachmentsHtml += `<a href="${escapeHtml(val)}" target="_blank" rel="noopener noreferrer" class="block bg-gray-50 border p-2 rounded text-blue-600 hover:bg-blue-50 transition truncate"><i class="fas fa-paperclip mr-2"></i> ${escapeHtml(header)}</a>`;
+                    } else if (!skipHeaders.includes(hUpper)) {
+                         let label = String(header).replace(/_/g, ' ');
+                         if(hUpper.includes("PERINCIAN")) label = "Perincian";
+                         if(hUpper.includes("TARIKH")) label = "Tarikh / Masa";
                          detailsHtml += `
                             <div class="grid grid-cols-3 gap-2 border-b border-gray-50 pb-2 last:border-0">
                                 <div class="col-span-1 text-xs text-gray-400 font-bold uppercase pt-1">${escapeHtml(label)}</div>
@@ -1521,105 +1415,85 @@
                             </div>`;
                     }
                 });
-            } else {
-                detailsHtml = "<p class='text-gray-400 italic text-center'>Tiada butiran tambahan.</p>";
             }
-
+            if (!detailsHtml) detailsHtml = "<p class='text-gray-400 italic text-center'>Tiada butiran tambahan.</p>";
             contentDiv.innerHTML = detailsHtml;
-
-            if(attachmentsHtml) {
-                attachDiv.innerHTML = attachmentsHtml;
-                attachContainer.classList.remove('hidden');
-            } else {
-                attachContainer.classList.add('hidden');
-            }
-
+            if(attachmentsHtml) { attachDiv.innerHTML = attachmentsHtml; attachContainer.classList.remove('hidden'); }
+            else { attachContainer.classList.add('hidden'); }
             document.getElementById('modal-history-detail').classList.remove('hidden');
         }
-        window.closeHistoryModal = function() {
-            document.getElementById('modal-history-detail').classList.add('hidden');
-        }
+        window.closeHistoryModal = function() { document.getElementById('modal-history-detail').classList.add('hidden'); }
         window.closeSuccessPopup = function() {
             document.getElementById('modal-success-popup').classList.add('hidden');
             showView('view-success');
         }
-        // --- ADMIN FUNCTIONS ---
-        function addMemo() {
+        // --- ADMIN CONTENT FUNCTIONS ---
+        async function addMemo() {
             const val = document.getElementById('new-memo-text').value.trim();
             if(val) {
                 const memos = JSON.parse(localStorage.getItem('app_memos')); memos.unshift(val);
                 localStorage.setItem('app_memos', JSON.stringify(memos));
-                document.getElementById('new-memo-text').value = ''; loadAdminPanel(); syncConfigToCloud(); showNotification("Pengumuman Ditambah", "success");
+                document.getElementById('new-memo-text').value = ''; loadAdminPanel(); await syncConfigToCloud();
             }
         }
-        function deleteMemo(index) {
+        async function deleteMemo(index) {
             const memos = JSON.parse(localStorage.getItem('app_memos')); memos.splice(index, 1);
             localStorage.setItem('app_memos', JSON.stringify(memos));
-            loadAdminPanel(); syncConfigToCloud(); showNotification("Pengumuman Dipadam", "warning");
+            loadAdminPanel(); await syncConfigToCloud();
         }
-        function addSlideImage() {
+        async function addSlideImage() {
             const url = document.getElementById('new-img-url').value;
             if(url) {
                 const s = JSON.parse(localStorage.getItem('app_slides')); s.push(url);
                 localStorage.setItem('app_slides', JSON.stringify(s));
-                document.getElementById('new-img-url').value=''; loadAdminPanel(); syncConfigToCloud(); showNotification("Imej ditambah", "success");
+                document.getElementById('new-img-url').value=''; loadAdminPanel(); await syncConfigToCloud();
             }
         }
-        function removeSlide(i) {
+        async function removeSlide(i) {
             const s = JSON.parse(localStorage.getItem('app_slides'));
-            if(s.length>1) { s.splice(i,1); localStorage.setItem('app_slides', JSON.stringify(s)); loadAdminPanel(); syncConfigToCloud(); showNotification("Imej dipadam", "warning"); }
+            if(s.length>1) { s.splice(i,1); localStorage.setItem('app_slides', JSON.stringify(s)); loadAdminPanel(); await syncConfigToCloud(); }
             else { showNotification("Galeri mesti mempunyai sekurang-kurangnya satu imej.", "error"); }
         }
-
-        function saveInfoConfig() {
+        async function saveInfoConfig() {
             const hours = document.getElementById('admin-op-hours').value;
             const location = document.getElementById('admin-location').value;
             const mapLink = document.getElementById('admin-map-link').value;
-
             if (hours || location || mapLink) {
                 const currentInfo = JSON.parse(localStorage.getItem('app_info'));
                 if (hours) currentInfo.hours = hours;
                 if (location) currentInfo.location = location;
                 if (mapLink) currentInfo.mapLink = mapLink;
-
                 localStorage.setItem('app_info', JSON.stringify(currentInfo));
                 loadAdminPanel();
-                syncConfigToCloud();
-                showNotification("Info pejabat dikemaskini!", "success");
+                await syncConfigToCloud();
                 updateInfoUI();
             }
         }
-        function addGovInfo() {
+        async function addGovInfo() {
             const title = document.getElementById('new-gov-title').value;
             const img = document.getElementById('new-gov-img').value;
             const desc = document.getElementById('new-gov-desc').value;
-
             if(title && desc) {
                 const list = JSON.parse(localStorage.getItem('app_gov_info')) || [];
                 list.unshift({ title: title, img: img, desc: desc });
                 localStorage.setItem('app_gov_info', JSON.stringify(list));
-
-                // Clear inputs
                 document.getElementById('new-gov-title').value = '';
                 document.getElementById('new-gov-img').value = '';
                 document.getElementById('new-gov-desc').value = '';
-
                 loadAdminPanel();
-                syncConfigToCloud();
-                showNotification("Info Kerajaan Ditambah", "success");
+                await syncConfigToCloud();
             } else {
                 showNotification("Sila isi Tajuk dan Penerangan", "warning");
             }
         }
-        function deleteGovInfo(index) {
+        async function deleteGovInfo(index) {
             const list = JSON.parse(localStorage.getItem('app_gov_info')) || [];
             list.splice(index, 1);
             localStorage.setItem('app_gov_info', JSON.stringify(list));
             loadAdminPanel();
-            syncConfigToCloud();
-            showNotification("Info Dipadam", "warning");
+            await syncConfigToCloud();
         }
-        // --- FORM & STATUS LOGIC ---
+        // --- FORM & STATUS ---
         let currentCategory = '';
         function startForm(category) {
             const statuses = JSON.parse(localStorage.getItem('app_category_status')) || {};
@@ -1628,19 +1502,17 @@
             document.getElementById('form-title').innerText = category.toUpperCase();
             document.getElementById('dynamic-fields').innerHTML = categoryConfig[category].fields;
             document.getElementById('submissionForm').reset();
-
-            // Auto-fill for member (if profile loaded)
             if (currentUser && userProfile) {
                 const nameIn = document.querySelector('input[name="nama"]');
                 const icIn = document.querySelector('input[name="ic"]');
                 const emailIn = document.querySelector('input[name="email"]');
-                const phoneIn = document.querySelector('input[name="phone"]'); // Corrected from signup-phone
-                const addressIn = document.querySelector('textarea[name="address"]'); // Select address field
+                const phoneIn = document.querySelector('input[name="phone"]');
+                const addressIn = document.querySelector('textarea[name="address"]');
                 if(icIn) icIn.value = userProfile.ic;
                 if(emailIn) emailIn.value = userProfile.email;
-                if(nameIn) nameIn.value = userProfile.nama || ''; // Auto-fill name
-                if(phoneIn) phoneIn.value = userProfile.phone || ''; // Auto-fill phone
-                if(addressIn) addressIn.value = userProfile.address || ''; // Auto-fill address
+                if(nameIn) nameIn.value = userProfile.nama || '';
+                if(phoneIn) phoneIn.value = userProfile.phone || '';
+                if(addressIn) addressIn.value = userProfile.address || '';
             }
             showView('view-form');
         }
@@ -1649,23 +1521,17 @@
             reader.onload = () => resolve({ name: file.name, mimeType: file.type, data: reader.result.split(',')[1] });
             reader.onerror = error => reject(error);
         });
-        // BAHARU: mode:'no-cors' dibuang supaya response server dibaca & disahkan
-        // (dulu, kegagalan Apps Script tetap papar "Berjaya" walaupun data tak simpan).
-        // refNo kini dipulangkan oleh server (bukan dikira sendiri dari No. IC).
         async function handleFormSubmit(e) {
             e.preventDefault();
             const formData = new FormData(e.target);
             if(!formData.get('ic') || formData.get('ic').length < 12) { showNotification("No. Kad Pengenalan tidak lengkap.", "error"); return; }
             const consentBox = document.getElementById('form-consent');
             if (consentBox && !consentBox.checked) { showNotification("Sila bersetuju dengan Dasar Privasi sebelum menghantar.", "warning"); return; }
-
             showLoader('loading_submit', 0);
-
             try {
-                // DETERMINE UID
                 const submitterUid = currentUser ? currentUser.uid : "Guest";
                 const payload = {
-                    uid: submitterUid, // SEND UID TO APPSCRIPT
+                    uid: submitterUid,
                     category: currentCategory,
                     nama: formData.get('nama'),
                     ic: formData.get('ic'),
@@ -1683,7 +1549,6 @@
                 };
                 const fileInputs = document.querySelectorAll('input[type="file"]');
                 for (const input of fileInputs) { if (input.files.length > 0) { for (let i = 0; i < input.files.length; i++) { payload.files.push(await fileToBase64(input.files[i])); }}}
-
                 let refNo = "";
                 if(APPS_SCRIPT_URL && APPS_SCRIPT_URL !== "URL_APPSCRIPT_ANDA_DI_SINI") {
                     const response = await fetch(APPS_SCRIPT_URL, {
@@ -1699,13 +1564,9 @@
                     }
                     refNo = result.refNo || "";
                 }
-
-                // Local fallback storage (optional)
                 const records = JSON.parse(localStorage.getItem('app_submissions'));
                 records.push({ refNo: refNo, ic: formData.get('ic'), name: formData.get('nama'), category: currentCategory, status: "Dalam Semakan", date: new Date().toLocaleDateString('ms-MY') });
                 localStorage.setItem('app_submissions', JSON.stringify(records));
-
-                // UI Feedback
                 document.getElementById('output-refNo').innerText = refNo;
                 if(currentUser) {
                     document.getElementById('member-note').classList.remove('hidden');
@@ -1715,36 +1576,28 @@
                     document.getElementById('guest-warning').classList.remove('hidden');
                 }
                 hideLoader();
-
-                // Mesej dinamik mengikut kategori
                 let msgCat = currentCategory.toLowerCase();
                 if(msgCat === 'sukarelawan') msgCat = 'pendaftaran sukarelawan';
                 if(msgCat === 'maklum balas') msgCat = 'maklum balas';
                 document.getElementById('popup-success-msg').innerText = `Terima kasih atas ${msgCat} yang dibuat, team Karambunai telah menerima ${msgCat} anda!`;
-
-                // Tunjuk popup
                 document.getElementById('modal-success-popup').classList.remove('hidden');
-
             } catch (error) {
                 hideLoader();
                 showNotification("Ralat penghantaran.", "error");
             }
         }
-        // --- FETCH MEMBER HISTORY (BAHARU: guna Apps Script action get_history + idToken,
-        // bukan lagi fetch terus Google Sheet published-CSV) ---
+        // --- MEMBER HISTORY (guna uid; Apps Script v5 tak perlu idToken) ---
         async function fetchMemberHistory() {
             if(!currentUser) return;
             showView('view-history');
             const listContainer = document.getElementById('history-list');
             listContainer.innerHTML = '<p class="text-center text-gray-500 py-10"><i class="fas fa-spinner fa-spin mr-2"></i> Sedang mengambil data...</p>';
-            // Reset Global History Data
             currentHistoryData = [];
             try {
-                const idToken = await currentUser.getIdToken();
                 const response = await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({ action: 'get_history', idToken: idToken })
+                    body: JSON.stringify({ action: 'get_history', uid: currentUser.uid })
                 });
                 const result = await response.json();
                 if (result.status !== 'success') {
@@ -1775,20 +1628,16 @@
                 listContainer.innerHTML = '<p class="text-red-500 text-center">Gagal memuatkan sejarah.</p>';
             }
         }
-        // --- CHECK STATUS (BAHARU: guna Apps Script action check_status,
-        // bukan lagi fetch terus Google Sheet published-CSV) ---
+        // --- CHECK STATUS ---
         async function checkStatus() {
             const inputVal = document.getElementById('check-refNo').value.trim();
             if(!inputVal) { showNotification("Sila masukkan nombor rujukan atau telefon.", "warning"); return; }
-
             showLoader('loading_check', 0);
-
             const resultList = document.getElementById('status-result-list');
             const resultContainer = document.getElementById('status-result');
             resultList.innerHTML = '';
             resultContainer.classList.add('hidden');
             currentHistoryData = [];
-
             try {
                 const response = await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
@@ -1797,12 +1646,10 @@
                 });
                 const result = await response.json();
                 resultContainer.classList.remove('hidden');
-
                 if (result.status !== 'success') {
                     resultList.innerHTML = `<div class="text-center p-6 bg-red-50 rounded-lg border border-red-100"><p class="text-xs text-gray-600">${escapeHtml(result.message || 'Ralat semasa semakan.')}</p></div>`;
                     return;
                 }
-
                 currentHistoryData = result.records || [];
                 if (currentHistoryData.length > 0) {
                     resultList.innerHTML = currentHistoryData.map((rec, index) => `
@@ -1833,39 +1680,119 @@
                 hideLoader();
             }
         }
-        // --- ADMIN LOAD UI ---
-        // BAHARU: fallback createUserWithEmailAndPassword DIBUANG — admin account
-        // tak lagi boleh self-provision dari borang login awam. Kalau akaun admin
-        // belum wujud, kena cipta manual dalam Firebase Console.
+        // =====================================================================
+        // ADMIN LOGIN / LOGOUT / RESET  (Apps Script — BUKAN Firebase)
+        // =====================================================================
+        function adminMsg(text, level) {
+            const el = document.getElementById('admin-msg');
+            const styles = {
+                error: 'bg-red-50 border-red-200 text-red-700',
+                ok: 'bg-green-50 border-green-200 text-green-700',
+                info: 'bg-blue-50 border-blue-200 text-blue-700'
+            };
+            el.className = `mt-4 text-xs rounded px-3 py-2 border ${styles[level]}`;
+            el.innerHTML = text;
+        }
+        function showAdminForgot() {
+            document.getElementById('admin-login-form').classList.add('hidden');
+            document.getElementById('admin-forgot-step2').classList.add('hidden');
+            document.getElementById('admin-forgot-step1').classList.remove('hidden');
+            document.getElementById('admin-msg').classList.add('hidden');
+        }
+        function hideAdminForgot() {
+            document.getElementById('admin-forgot-step1').classList.add('hidden');
+            document.getElementById('admin-forgot-step2').classList.add('hidden');
+            document.getElementById('admin-login-form').classList.remove('hidden');
+            document.getElementById('admin-msg').classList.add('hidden');
+        }
         async function adminLogin() {
-            const email = document.getElementById('admin-id').value;
+            const email = document.getElementById('admin-id').value.trim();
             const pass = document.getElementById('admin-pass').value;
-            const targetAdminEmail = 'pusatkhidmatn16karambunai@gmail.com';
-
-            if (email !== targetAdminEmail) {
-                showNotification("Hanya email admin dibenarkan.", "error");
-                return;
-            }
+            if (!email || !pass) { adminMsg("Sila isi emel dan kata laluan.", "error"); return; }
             showLoader('loading_text', 0);
             try {
-                await window.signInWithEmailAndPassword(window.auth, email, pass);
-                showNotification("Log masuk admin berjaya.", "success");
-                // onAuthStateChanged akan handle redirect
-            } catch (error) {
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'admin_login', email: email, password: pass })
+                });
+                const raw = await response.text();
+                console.log('[KARA-Di] admin_login →', raw.slice(0, 300));
+                const result = JSON.parse(raw);
                 hideLoader();
-                let msg = "Log masuk gagal.";
-                if(error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') msg = "Kata laluan salah.";
-                else if(error.code === 'auth/user-not-found') msg = "Akaun admin belum wujud. Hubungi pentadbir sistem untuk setup akaun secara manual.";
-                else if(error.code === 'auth/too-many-requests') msg = "Terlalu banyak percubaan. Sila tunggu.";
-                showNotification(msg, "error");
+                if (result.status !== 'success') { adminMsg(escapeHtml(result.message), "error"); return; }
+                adminSessionToken = result.sessionToken;
+                try { sessionStorage.setItem('karadi_admin_token', adminSessionToken); } catch (e) {}
+                document.getElementById('admin-pass').value = '';
+                document.getElementById('admin-msg').classList.add('hidden');
+                loadAdminPanel();
+                showView('view-admin-panel');
+                showNotification("Log masuk admin berjaya.", "success");
+            } catch (e) {
+                hideLoader();
+                adminMsg("Ralat sambungan: " + escapeHtml(e.message), "error");
             }
         }
-        function adminLogout() {
-            window.signOut(window.auth);
-            showView('view-home');
-            showNotification("Logged Out", "info");
+        async function adminRequestCode() {
+            const email = document.getElementById('admin-forgot-email').value.trim();
+            if (!email) { adminMsg("Sila masukkan emel admin.", "error"); return; }
+            showLoader('loading_text', 0);
+            try {
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'forgot_password', email: email })
+                });
+                const result = await response.json();
+                hideLoader();
+                if (result.status !== 'success') { adminMsg(escapeHtml(result.message), "error"); return; }
+                adminMsg(escapeHtml(result.message), "ok");
+                document.getElementById('admin-forgot-step1').classList.add('hidden');
+                document.getElementById('admin-forgot-step2').classList.remove('hidden');
+            } catch (e) {
+                hideLoader();
+                adminMsg("Ralat sambungan: " + escapeHtml(e.message), "error");
+            }
         }
-
+        async function adminSubmitReset() {
+            const code = document.getElementById('admin-reset-code').value.trim();
+            const pw1 = document.getElementById('admin-reset-pw1').value;
+            const pw2 = document.getElementById('admin-reset-pw2').value;
+            if (!code) { adminMsg("Sila masukkan kod 6-digit.", "error"); return; }
+            if (pw1.length < 10) { adminMsg("Kata laluan baharu mesti sekurang-kurangnya 10 aksara.", "error"); return; }
+            if (pw1 !== pw2) { adminMsg("Kata laluan tidak sepadan.", "error"); return; }
+            showLoader('loading_text', 0);
+            try {
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'reset_password', code: code, newPassword: pw1 })
+                });
+                const result = await response.json();
+                hideLoader();
+                if (result.status !== 'success') { adminMsg(escapeHtml(result.message), "error"); return; }
+                adminMsg(escapeHtml(result.message), "ok");
+                setTimeout(hideAdminForgot, 1800);
+            } catch (e) {
+                hideLoader();
+                adminMsg("Ralat sambungan: " + escapeHtml(e.message), "error");
+            }
+        }
+        async function adminLogout() {
+            if (adminSessionToken) {
+                try {
+                    await fetch(APPS_SCRIPT_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify({ action: 'admin_logout', sessionToken: adminSessionToken })
+                    });
+                } catch (e) { /* abaikan */ }
+            }
+            adminSessionToken = "";
+            try { sessionStorage.removeItem('karadi_admin_token'); } catch (e) {}
+            showView('view-home');
+            showNotification("Log keluar admin.", "info");
+        }
         function loadAdminPanel() {
             const isMaintenance = localStorage.getItem('app_maintenance') === 'true';
             document.getElementById('admin-sys-status').innerText = isMaintenance ? "PENYELENGGARAAN (OFFLINE)" : "AKTIF (ONLINE)";
@@ -1880,17 +1807,14 @@
             }).join('');
             const memos = JSON.parse(localStorage.getItem('app_memos'));
             document.getElementById('admin-memo-list').innerHTML = memos.map((m, i) => `<li class="flex justify-between items-center border-b border-gray-100 py-2"><span class="truncate pr-2">${escapeHtml(m)}</span><button onclick="deleteMemo(${i})" class="text-red-500 hover:text-red-700 text-xs border border-red-200 px-2 py-1 rounded">PADAM</button></li>`).join('');
-
             const slides = JSON.parse(localStorage.getItem('app_slides'));
             document.getElementById('admin-img-list').innerHTML = slides.map((src, i) => `<div class="h-16 bg-gray-100 rounded relative overflow-hidden group shadow-sm border border-gray-200"><img src="${escapeHtml(src)}" class="w-full h-full object-cover"><button onclick="removeSlide(${i})" class="absolute inset-0 flex items-center justify-center bg-white/90 text-red-600 font-bold text-xs opacity-0 group-hover:opacity-100 transition">BUANG</button></div>`).join('');
-            // Load Info values into inputs
             const info = JSON.parse(localStorage.getItem('app_info'));
             if(info) {
                 document.getElementById('admin-op-hours').value = info.hours;
                 document.getElementById('admin-location').value = info.location;
                 if(info.mapLink) document.getElementById('admin-map-link').value = info.mapLink;
             }
-            // NEW: LOAD GOV INFO LIST
             const govList = JSON.parse(localStorage.getItem('app_gov_info')) || [];
             document.getElementById('admin-gov-list').innerHTML = govList.map((item, i) => `
                 <div class="flex gap-3 bg-white p-2 border rounded shadow-sm items-center">
@@ -1905,51 +1829,39 @@
                 </div>
             `).join('');
         }
-        // --- OPTIMIZED INIT (Parallel Execution) ---
+        // --- INIT ---
         window.onload = function() {
-            // 1. Show loader
             showLoader('loading_text', 0);
-            // 2. Start Config Fetch in Background (Don't await)
             fetchGlobalConfig();
-            // 3. Start Auth Check Immediately
-            // Use a short timeout to ensure Firebase SDK is parsed
             setTimeout(() => {
                 if(window.firebaseLoaded) {
+                    // NOTA v5: cawangan khas "kalau emel = admin" DIBUANG. Akses admin
+                    // kini HANYA melalui borang log masuk pentadbir (Apps Script).
                     window.onAuthStateChanged(window.auth, async (user) => {
-                        hideLoader(); // Hide loader as soon as we know who the user is
+                        hideLoader();
+                        // Jangan ganggu paparan kalau admin sedang guna panel
+                        const adminPanelOpen = !document.getElementById('view-admin-panel').classList.contains('hidden');
+                        const adminLoginOpen = !document.getElementById('view-admin-login').classList.contains('hidden');
+                        if (adminPanelOpen || adminLoginOpen) return;
                         if (user) {
                             currentUser = user;
-
-                            // SEMAKAN KHAS UNTUK ADMIN
-                            if (user.email === 'pusatkhidmatn16karambunai@gmail.com') {
-                                loadAdminPanel();
-                                showView('view-admin-panel');
-                                return;
-                            }
-                            // LOGIK USER BIASA
                             try {
                                 const docSnap = await window.getDoc(window.doc(window.db, "users", user.uid));
-                                if (docSnap.exists()) {
-                                    userProfile = docSnap.data();
-                                }
+                                if (docSnap.exists()) userProfile = docSnap.data();
                                 updateDashboardUI();
                                 showView('view-dashboard');
                             } catch (e) { console.error("Profile fetch error:", e); }
                         } else {
-                            currentUser = null;
-                            userProfile = null;
+                            currentUser = null; userProfile = null;
                             showView('view-home');
                         }
                     });
                 } else {
-                    // Fallback if Firebase fails to load entirely
                     console.error("Firebase failed to init.");
                     hideLoader();
                     showView('view-home');
                 }
             }, 500);
-
-             // 4. Start Maintenance Polling (every 60s)
             setInterval(fetchGlobalConfig, 60000);
         };
     </script>
